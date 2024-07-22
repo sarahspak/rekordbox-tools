@@ -1,6 +1,10 @@
 # rekordbox-tools
-Tools to make rekordbox less shitty
+Tools to automate a few things before I bring stuff into rekordbox.
 
+Get the virtualenv: 
+```bash
+source venv/bin/activate
+```
 
 ## Prerequisites  
 

@@ -1,5 +1,7 @@
 """Remove numbers from the start of the filename"""
 
+from __future__ import annotations
+
 import argparse
 import logging
 import os
@@ -18,6 +20,7 @@ def recursive_filelist(directory: str, suffix: str) -> list:
     return file_list
 
 
+# This will allow us to run the script from the command line or from another script
 def main(base_dir: str, suffix: str, dry_run: bool) -> int:
     file_list = recursive_filelist(base_dir, suffix)
 
@@ -51,4 +54,7 @@ if __name__ == "__main__":
     parser.add_argument("-s", "--suffix", default="aiff")
     parser.add_argument("-d", "--dry-run", default=False)
     args = parser.parse_args()
-    main(base_dir=args.base_dir, suffix=args.suffix, dry_run=args.dry_run)
+    base_dir = args.base_dir
+    suffix = args.suffix
+    dry_run = args.dry_run
+    main(base_dir=base_dir, suffix=suffix, dry_run=dry_run)
