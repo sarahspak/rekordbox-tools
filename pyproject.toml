@@ -1,0 +1,165 @@
+[build-system]
+requires = ["setuptools"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "rekordbox_tools"
+authors = [
+    {name = "Sarah Pak", email = "sarahpak@email.com"},
+]
+description = "collection of tools to make working with rekordbox less shitty"
+readme = "README.md"
+requires-python = ">=3.10"
+
+version = "0.0.1"
+dependencies = [
+    "pydub",
+    "ruff",
+    "build",
+    "black",
+    "isort",
+    "pylint",
+    "pytest",
+    "mypy",
+    "ruff-lsp",
+    'importlib-metadata; python_version>"3.10"',
+]
+[tool.setuptools.packages.find]
+where = ["."]
+
+[project.scripts]
+flac-to-aiff = "rekordbox_tools.flac_to_aiff:main"
+
+# black
+[tool.black]
+line-length = 100
+include = '\.pyi?$'
+exclude = '''
+(
+  /(
+      \.eggs
+    | \.git
+    | \.hg
+    | \.mypy_cache
+    | \.tox
+    | \.venv
+    | _build
+    | buck-out
+    | build
+    | dist
+  )/
+  | foo.py
+)
+'''
+target-version = ['py311', 'py312']
+
+[tool.isort]
+profile = "black"
+line_length = 100
+
+[tool.pylint.format]
+max-line-length = "100"
+
+[tool.mypy]
+ignore_missing_imports = false
+
+[tool.ruff]
+# Exclude a variety of commonly ignored directories.
+exclude = [
+    ".bzr",
+    ".direnv",
+    ".eggs",
+    ".git",
+    ".git-rewrite",
+    ".hg",
+    ".ipynb_checkpoints",
+    ".mypy_cache",
+    ".nox",
+    ".pants.d",
+    ".pyenv",
+    ".pytest_cache",
+    ".pytype",
+    ".ruff_cache",
+    ".svn",
+    ".tox",
+    ".venv",
+    ".vscode",
+    "__pypackages__",
+    "_build",
+    "buck-out",
+    "build",
+    "dist",
+    "node_modules",
+    "site-packages",
+    "venv",
+]
+
+# Same as Black.
+line-length = 100
+indent-width = 4
+fix = true
+
+# Assume Python 3.12
+target-version = "py312"
+
+[tool.ruff.lint]
+# Enable Pyflakes (`F`) and a subset of the pycodestyle (`E`)  codes by default.
+# Unlike Flake8, Ruff doesn't enable pycodestyle warnings (`W`) or
+# McCabe complexity (`C901`) by default.
+select = [
+    "E4", # Subset of pycodestyle, see https://pycodestyle.pycqa.org/en/latest/intro.html#error-codes
+    "E7",
+    "E9",
+    "F", # Pyflakes
+    "W", # Pycodestyle warnings
+    "C90", # McCabe complexity
+    "I", # Isort
+    "N", # pep8-naming, https://docs.astral.sh/ruff/rules/#pep8-naming-n
+    "T", # Type annotations
+    "YTT", # flake8-2020, flake8 plugin which checks for misuse of `sys.version` or `sys.version_info`
+    "ANN", # flake8-annotations, flake8 plugin which checks for missing type annotations
+    "S", # flake8-bandit, flake8 plugin which checks for common security issues
+    "FBT", #flake8-boolean-trap, flake8 plugin which checks for boolean traps
+    "B", # flake8-bugbear, flake8 plugin which checks for common bugbears
+    "LOG", # flake8-logging, flake8 plugin which checks for common logging issues
+    "RUF", # ruff, ruff plugin which checks for common ruff issues
+]
+
+ignore = [
+    "S602", # do not check for shell=True
+    "S603", # do not check for execution of untrusted input. no validation required
+]
+
+# Allow fix for all enabled rules (when `--fix`) is provided.
+fixable = ["ALL"]
+unfixable = []
+
+# Allow unused variables when underscore-prefixed.
+dummy-variable-rgx = "^(_+|(_+[a-zA-Z0-9_]*[a-zA-Z0-9]+?))$"
+
+[tool.ruff.format]
+# Like Black, use double quotes for strings.
+quote-style = "double"
+
+# Like Black, indent with spaces, rather than tabs.
+indent-style = "space"
+
+# Like Black, respect magic trailing commas.
+skip-magic-trailing-comma = false
+
+# Like Black, automatically detect the appropriate line ending.
+line-ending = "auto"
+
+# Enable auto-formatting of code examples in docstrings. Markdown,
+# reStructuredText code/literal blocks and doctests are all supported.
+#
+# This is currently disabled by default, but it is planned for this
+# to be opt-out in the future.
+docstring-code-format = false
+
+# Set the line length limit used when formatting code snippets in
+# docstrings.
+#
+# This only has an effect when the `docstring-code-format` setting is
+# enabled.
+docstring-code-line-length = "dynamic"
