@@ -128,6 +128,7 @@ select = [
 ignore = [
     "S602", # do not check for shell=True
     "S603", # do not check for execution of untrusted input. no validation required
+    "S607", # do not check for start process with a shell
 ]
 
 # Allow fix for all enabled rules (when `--fix`) is provided.

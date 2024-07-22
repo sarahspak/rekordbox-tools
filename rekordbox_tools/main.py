@@ -33,7 +33,7 @@ def rename_files(base_library_dir: str) -> None:
         raise RuntimeError(f"Error renaming files: {e}") from e
 
 
-def dl_playlist_from_tidal(link: str, tidal_output_dir: str):
+def dl_playlist_from_tidal(link: str, tidal_output_dir: str) -> None:
     try:
         subprocess.run(
             ["tidal-dl", "-l", link, "-q", "Master", "-o", tidal_output_dir],
@@ -45,7 +45,7 @@ def dl_playlist_from_tidal(link: str, tidal_output_dir: str):
         raise RuntimeError(f"Error running tidal-dl: {e}") from e
 
 
-def move_from_tidal_output_to_library_dir(base_library_dir, tidal_output_dir):
+def move_from_tidal_output_to_library_dir(base_library_dir: str, tidal_output_dir: str) -> None:
     try:
         subprocess.run(
             f"mv {tidal_output_dir}/Playlist/*/*.flac {base_library_dir}/",
@@ -58,7 +58,7 @@ def move_from_tidal_output_to_library_dir(base_library_dir, tidal_output_dir):
         raise RuntimeError(f"Error moving files: {e}") from e
 
 
-def delete_playlist_folder(base_library_dir):
+def delete_playlist_folder(base_library_dir: str) -> None:
     try:
         subprocess.run(
             f"rm -rf {base_library_dir}/Playlist",
@@ -71,7 +71,7 @@ def delete_playlist_folder(base_library_dir):
         raise RuntimeError(f"Error deleting Playlist folder: {e}") from e
 
 
-def convert_all_flac_to_aiff(base_library_dir):
+def convert_all_flac_to_aiff(base_library_dir: str) -> None:
     try:
         subprocess.run(
             f"find {base_library_dir}/ -name '*.flac' -print0 | "
@@ -87,7 +87,7 @@ def convert_all_flac_to_aiff(base_library_dir):
         raise RuntimeError(f"Error converting flac files to aiff: {e}") from e
 
 
-def delete_all_files_ending_in_flac(base_library_dir):
+def delete_all_files_ending_in_flac(base_library_dir: str) -> None:
     # then delete all the files ending in .flac
     try:
         subprocess.run(
